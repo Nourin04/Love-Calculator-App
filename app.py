@@ -50,6 +50,14 @@ def pet_preference_match(pet1, pet2):
         return 90
     return random.randint(50, 80)
 
+def love_song_recommendation():
+    songs = ["Perfect - Ed Sheeran", "Just the Way You Are - Bruno Mars", "Thinking Out Loud - Ed Sheeran", "Can't Help Falling in Love - Elvis Presley", "My Heart Will Go On - Celine Dion"]
+    return random.choice(songs)
+
+def future_prediction():
+    predictions = ["A romantic trip to Paris", "A cozy home filled with love", "A surprise proposal", "A dream wedding on the beach", "Growing old together with endless adventures"]
+    return random.choice(predictions)
+
 def main():
     st.set_page_config(page_title="AI Love Calculator", page_icon="💘", layout="wide")
     page_bg = "https://source.unsplash.com/1600x900/?love,romance"
@@ -72,25 +80,18 @@ def main():
     zodiac2 = st.selectbox("Select your partner's zodiac sign:", ["Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo", "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"])
     zodiac_score = zodiac_compatibility(zodiac1, zodiac2)
     
-    vacation1 = st.selectbox("Choose your dream vacation:", ["Beach", "Mountains", "City Escape", "Safari", "Cruise"])
-    vacation2 = st.selectbox("Choose your partner's dream vacation:", ["Beach", "Mountains", "City Escape", "Safari", "Cruise"])
-    vacation_score = dream_vacation_match(vacation1, vacation2)
-    
-    pet1 = st.selectbox("Pick a favorite pet:", ["Dog", "Cat", "Bird", "Rabbit", "Fish"])
-    pet2 = st.selectbox("Pick your partner's favorite pet:", ["Dog", "Cat", "Bird", "Rabbit", "Fish"])
-    pet_score = pet_preference_match(pet1, pet2)
-    
     if st.button("💓 Calculate Love Score 💓"):
         ai_score = ai_compatibility_analysis(name1, name2, relationship_desc)
-        ml_score = ml_based_compatibility(zodiac_score, vacation_score, pet_score)
-        final_score = (zodiac_score + vacation_score + pet_score + ai_score + ml_score) // 5
+        ml_score = ml_based_compatibility(zodiac_score, 75, 80)
+        final_score = (zodiac_score + ai_score + ml_score) // 3
         
         st.markdown("### 💕 Love Score Results 💕")
         st.markdown(f"<h2 style='color: #FF69B4;'>Love Score for {name1} and {name2}: {final_score}%</h2>", unsafe_allow_html=True)
         
         st.success(f"AI Analysis: Your names and relationship description give a compatibility score of {ai_score}%")
         st.info(f"Machine Learning Prediction: Based on your preferences, compatibility is {ml_score}%")
-        st.warning(f"🦸 Your couple superpower is **{random.choice(['telepathic communication', 'finishing each other’s sentences', 'unbeatable dance duo'])}**.")
+        st.warning(f"🎶 Your love song is **{love_song_recommendation()}**.")
+        st.warning(f"🔮 Your future together: **{future_prediction()}**.")
 
 if __name__ == "__main__":
     main()
