@@ -69,8 +69,9 @@ def main():
                 color: white;
                 text-align: center;
             }}
-            h2 {{
+            h1, h2, h3 {{
                 color: #FF69B4;
+                text-align: center;
             }}
             .result-box {{
                 background-color: rgba(255, 255, 255, 0.1);
@@ -82,6 +83,7 @@ def main():
     """, unsafe_allow_html=True)
     
     st.title("💘 AI Love Calculator 💘")
+    st.header("Find out your love compatibility with AI magic!")
     
     name1 = st.text_input("Enter your name:")
     name2 = st.text_input("Enter your partner's name:")
@@ -89,6 +91,8 @@ def main():
     
     zodiac1 = st.selectbox("Select your zodiac sign:", ["Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo", "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"])
     zodiac2 = st.selectbox("Select your partner's zodiac sign:", ["Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo", "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"])
+    favorite_activity = st.selectbox("What’s your favorite date activity?", ["Movie Night", "Romantic Dinner", "Adventure Trip", "Beach Walk", "Gaming Together", "Cooking Together"])
+    love_language = st.selectbox("What’s your love language?", ["Words of Affirmation", "Quality Time", "Physical Touch", "Acts of Service", "Gifts"])
     zodiac_score = zodiac_compatibility(zodiac1, zodiac2)
     
     if st.button("💓 Calculate Love Score 💓"):
@@ -96,7 +100,7 @@ def main():
         ml_score = ml_based_compatibility(zodiac_score, 75, 80)
         final_score = (zodiac_score + ai_score + ml_score) // 3
         
-        st.markdown("### 💕 Love Score Results 💕")
+        st.subheader("💕 Love Score Results 💕")
         st.markdown(f"<h2>Love Score for {name1} and {name2}: {final_score}%</h2>", unsafe_allow_html=True)
         st.markdown("<div class='result-box'>", unsafe_allow_html=True)
         st.success(f"AI Analysis: Your names and relationship description give a compatibility score of {ai_score}%")
