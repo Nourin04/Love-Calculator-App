@@ -40,32 +40,43 @@ def zodiac_compatibility(sign1, sign2):
     }
     return compatibility_chart.get((sign1, sign2), random.randint(40, 90))
 
-def dream_vacation_match(vacation1, vacation2):
-    if vacation1 == vacation2:
-        return 95
-    return random.randint(50, 85)
-
-def pet_preference_match(pet1, pet2):
-    if pet1 == pet2:
-        return 90
-    return random.randint(50, 80)
-
 def love_song_recommendation():
-    songs = ["Perfect - Ed Sheeran", "Just the Way You Are - Bruno Mars", "Thinking Out Loud - Ed Sheeran", "Can't Help Falling in Love - Elvis Presley", "My Heart Will Go On - Celine Dion"]
+    songs = [
+        "Perfect - Ed Sheeran", "Just the Way You Are - Bruno Mars", "Thinking Out Loud - Ed Sheeran", 
+        "Can't Help Falling in Love - Elvis Presley", "My Heart Will Go On - Celine Dion", 
+        "Unchained Melody - The Righteous Brothers", "All of Me - John Legend", "Endless Love - Lionel Richie & Diana Ross",
+        "A Thousand Years - Christina Perri", "I Will Always Love You - Whitney Houston"
+    ]
     return random.choice(songs)
 
 def future_prediction():
-    predictions = ["A romantic trip to Paris", "A cozy home filled with love", "A surprise proposal", "A dream wedding on the beach", "Growing old together with endless adventures"]
+    predictions = [
+        "A romantic trip to Paris", "A cozy home filled with love", "A surprise proposal", 
+        "A dream wedding on the beach", "Growing old together with endless adventures", 
+        "A spontaneous road trip across the country", "A candle-lit dinner on a rooftop", 
+        "Winning a couples' dance contest", "Building your dream house together", "Traveling the world hand-in-hand"
+    ]
     return random.choice(predictions)
 
 def main():
     st.set_page_config(page_title="AI Love Calculator", page_icon="💘", layout="wide")
-    page_bg = "https://source.unsplash.com/1600x900/?love,romance"
+    page_bg = "https://source.unsplash.com/1600x900/?love,romance,hearts"
     st.markdown(f"""
         <style>
             .stApp {{
                 background: url({page_bg});
                 background-size: cover;
+                color: white;
+                text-align: center;
+            }}
+            h2 {{
+                color: #FF69B4;
+            }}
+            .result-box {{
+                background-color: rgba(255, 255, 255, 0.1);
+                padding: 20px;
+                border-radius: 15px;
+                margin-top: 20px;
             }}
         </style>
     """, unsafe_allow_html=True)
@@ -86,12 +97,13 @@ def main():
         final_score = (zodiac_score + ai_score + ml_score) // 3
         
         st.markdown("### 💕 Love Score Results 💕")
-        st.markdown(f"<h2 style='color: #FF69B4;'>Love Score for {name1} and {name2}: {final_score}%</h2>", unsafe_allow_html=True)
-        
+        st.markdown(f"<h2>Love Score for {name1} and {name2}: {final_score}%</h2>", unsafe_allow_html=True)
+        st.markdown("<div class='result-box'>", unsafe_allow_html=True)
         st.success(f"AI Analysis: Your names and relationship description give a compatibility score of {ai_score}%")
         st.info(f"Machine Learning Prediction: Based on your preferences, compatibility is {ml_score}%")
         st.warning(f"🎶 Your love song is **{love_song_recommendation()}**.")
         st.warning(f"🔮 Your future together: **{future_prediction()}**.")
+        st.markdown("</div>", unsafe_allow_html=True)
 
 if __name__ == "__main__":
     main()
