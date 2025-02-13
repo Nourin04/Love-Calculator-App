@@ -3,9 +3,16 @@ import streamlit as st
 
 def zodiac_compatibility(sign1, sign2):
     compatibility_chart = {
-        ("Aries", "Leo"): 90, ("Aries", "Sagittarius"): 85, ("Aries", "Cancer"): 50,
-        ("Taurus", "Virgo"): 88, ("Taurus", "Capricorn"): 80, ("Taurus", "Gemini"): 45,
-        # Add more combinations...
+        ("Aries", "Leo"): 90, ("Aries", "Sagittarius"): 85, ("Aries", "Gemini"): 75, ("Aries", "Cancer"): 50,
+        ("Taurus", "Virgo"): 88, ("Taurus", "Capricorn"): 80, ("Taurus", "Gemini"): 45, ("Taurus", "Libra"): 55,
+        ("Gemini", "Libra"): 92, ("Gemini", "Aquarius"): 89, ("Gemini", "Pisces"): 60, ("Gemini", "Cancer"): 50,
+        ("Cancer", "Scorpio"): 95, ("Cancer", "Pisces"): 90, ("Cancer", "Aries"): 50, ("Cancer", "Leo"): 60,
+        ("Leo", "Sagittarius"): 93, ("Leo", "Aquarius"): 70, ("Leo", "Virgo"): 65,
+        ("Virgo", "Capricorn"): 88, ("Virgo", "Pisces"): 72,
+        ("Libra", "Aquarius"): 91, ("Libra", "Sagittarius"): 80,
+        ("Scorpio", "Pisces"): 96, ("Scorpio", "Capricorn"): 90,
+        ("Sagittarius", "Aquarius"): 85,
+        ("Capricorn", "Taurus"): 87,
     }
     return compatibility_chart.get((sign1, sign2), random.randint(40, 90))
 
@@ -15,10 +22,15 @@ def love_language_match(lang1, lang2):
     return random.randint(50, 80)
 
 def fantasy_match(role1, role2):
-    good_matches = [("Knight", "Mage"), ("Rogue", "Healer"), ("Warrior", "Archer")]
+    good_matches = [("Knight", "Mage"), ("Rogue", "Healer"), ("Warrior", "Archer"), ("Sorcerer", "Paladin")]
     if (role1, role2) in good_matches or (role2, role1) in good_matches:
         return 90
     return random.randint(40, 85)
+
+def favorite_activity_match(activity1, activity2):
+    if activity1 == activity2:
+        return 90
+    return random.randint(50, 80)
 
 def love_story(name1, name2, score):
     if score > 85:
@@ -42,6 +54,17 @@ def love_challenge(score):
     return "🎉 Plan a surprise date idea!"
 
 def main():
+    st.set_page_config(page_title="AI Love Calculator", page_icon="💘", layout="wide")
+    page_bg = "https://source.unsplash.com/1600x900/?love,romance"
+    st.markdown(f"""
+        <style>
+            .stApp {{
+                background: url({page_bg});
+                background-size: cover;
+            }}
+        </style>
+    """, unsafe_allow_html=True)
+    
     st.title("💘 AI Love Calculator 💘")
     
     name1 = st.text_input("Enter your name:")
@@ -55,8 +78,8 @@ def main():
     love_lang2 = st.selectbox("Select your partner's love language:", ["Words of Affirmation", "Acts of Service", "Receiving Gifts", "Quality Time", "Physical Touch"])
     love_lang_score = love_language_match(love_lang1, love_lang2)
     
-    fantasy1 = st.selectbox("Choose your fantasy role:", ["Knight", "Mage", "Rogue", "Healer", "Warrior", "Archer"])
-    fantasy2 = st.selectbox("Choose your partner's fantasy role:", ["Knight", "Mage", "Rogue", "Healer", "Warrior", "Archer"])
+    fantasy1 = st.selectbox("Choose your fantasy role:", ["Knight", "Mage", "Rogue", "Healer", "Warrior", "Archer", "Sorcerer", "Paladin"])
+    fantasy2 = st.selectbox("Choose your partner's fantasy role:", ["Knight", "Mage", "Rogue", "Healer", "Warrior", "Archer", "Sorcerer", "Paladin"])
     fantasy_score = fantasy_match(fantasy1, fantasy2)
     
     if st.button("💓 Calculate Love Score 💓"):
