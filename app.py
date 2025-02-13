@@ -32,6 +32,16 @@ def favorite_activity_match(activity1, activity2):
         return 90
     return random.randint(50, 80)
 
+def dream_vacation_match(vacation1, vacation2):
+    if vacation1 == vacation2:
+        return 95
+    return random.randint(50, 85)
+
+def pet_preference_match(pet1, pet2):
+    if pet1 == pet2:
+        return 90
+    return random.randint(50, 80)
+
 def love_story(name1, name2, score):
     if score > 85:
         return f"💖 {name1} and {name2} were destined to be together, traveling the world in love!"
@@ -74,16 +84,16 @@ def main():
     zodiac2 = st.selectbox("Select your partner's zodiac sign:", ["Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo", "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"])
     zodiac_score = zodiac_compatibility(zodiac1, zodiac2)
     
-    love_lang1 = st.selectbox("Select your love language:", ["Words of Affirmation", "Acts of Service", "Receiving Gifts", "Quality Time", "Physical Touch"])
-    love_lang2 = st.selectbox("Select your partner's love language:", ["Words of Affirmation", "Acts of Service", "Receiving Gifts", "Quality Time", "Physical Touch"])
-    love_lang_score = love_language_match(love_lang1, love_lang2)
+    vacation1 = st.selectbox("Choose your dream vacation:", ["Beach", "Mountains", "City Escape", "Safari", "Cruise"])
+    vacation2 = st.selectbox("Choose your partner's dream vacation:", ["Beach", "Mountains", "City Escape", "Safari", "Cruise"])
+    vacation_score = dream_vacation_match(vacation1, vacation2)
     
-    fantasy1 = st.selectbox("Choose your fantasy role:", ["Knight", "Mage", "Rogue", "Healer", "Warrior", "Archer", "Sorcerer", "Paladin"])
-    fantasy2 = st.selectbox("Choose your partner's fantasy role:", ["Knight", "Mage", "Rogue", "Healer", "Warrior", "Archer", "Sorcerer", "Paladin"])
-    fantasy_score = fantasy_match(fantasy1, fantasy2)
+    pet1 = st.selectbox("Pick a favorite pet:", ["Dog", "Cat", "Bird", "Rabbit", "Fish"])
+    pet2 = st.selectbox("Pick your partner's favorite pet:", ["Dog", "Cat", "Bird", "Rabbit", "Fish"])
+    pet_score = pet_preference_match(pet1, pet2)
     
     if st.button("💓 Calculate Love Score 💓"):
-        final_score = (zodiac_score + love_lang_score + fantasy_score) // 3
+        final_score = (zodiac_score + vacation_score + pet_score) // 3
         
         st.markdown("### 💕 Love Score Results 💕")
         st.markdown(f"<h2 style='color: #FF69B4;'>Love Score for {name1} and {name2}: {final_score}%</h2>", unsafe_allow_html=True)
