@@ -1,4 +1,6 @@
-sklearn
-nltk
 streamlit
+nltk
 textblob
+scikit-learn
+numpy
+joblib
